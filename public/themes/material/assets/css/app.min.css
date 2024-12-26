@@ -948,7 +948,7 @@
     background-color: var(--vz-vertical-menu-sub-item-color);
     position: absolute;
     left: 2px;
-    top: 16.5px;
+    top: 11px;
     -webkit-transition: all .4s ease-in-out;
     transition: all .4s ease-in-out;
     opacity: .5

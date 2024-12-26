@@ -45,7 +45,7 @@
                             </a>
                             <div class="collapse menu-dropdown" id="sidebarServices">
                                 <ul class="nav nav-sm flex-column">
-                                    <li class="nav-item"><a href="#" class="nav-link" data-key="t-job-entry">Job Entry</a></li>
+                                    <li class="nav-item"><a href="{{ route('services.job-entry') }}" class="nav-link" data-key="t-job-entry">Job Entry</a></li>
                                     <li class="nav-item"><a href="#" class="nav-link" data-key="t-assign-tech">Assign Technician</a></li>
                                     <li class="nav-item"><a href="#" class="nav-link" data-key="t-take-job">Take For Job</a></li>
                                     <li class="nav-item"><a href="#" class="nav-link" data-key="t-close-job">Close Job</a></li>

@@ -109,3 +109,5 @@ Route::get('/balance-sheet', App\Livewire\BalanceSheet::class)->name('balance-sh
 Route::get('/profit-loss', App\Livewire\ProfitLoss::class)->name('profit-loss');
 
 Route::get('/user-privileges', App\Livewire\UserPrivileges::class)->name('user-privileges');
+
+Route::get('/services/job-entry', App\Livewire\ServicesJobEntry::class)->name('services.job-entry');
