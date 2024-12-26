@@ -1,0 +1,243 @@
+-- SQL schema for Roles Master Table
+CREATE TABLE roles (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    description TEXT DEFAULT NULL,
+    session_time_minutes INT DEFAULT NULL, -- New column for session time in minutes
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+-- SQL schema for Device Companies Master Table
+CREATE TABLE device_companies (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+-- SQL schema for Device Colors Master Table
+CREATE TABLE device_colors (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+-- SQL schema for Device Physical Conditions Master Table
+CREATE TABLE device_physical_conditions (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+-- SQL schema for Device Accessories Master Table
+CREATE TABLE device_accessories (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    with_serial_no BOOLEAN DEFAULT FALSE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+-- SQL schema for Service Complaints Master Table
+CREATE TABLE service_complaints (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+-- SQL schema for Complaint and Estimate Master Table
+CREATE TABLE complaint_estimates (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    service_complaint_id INT NOT NULL, -- FK to Service Complaints
+    estimate_amount DECIMAL(10, 2) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (service_complaint_id) REFERENCES service_complaints(id) ON DELETE CASCADE
+);
+
+-- SQL schema for Initial Checks Master Table
+CREATE TABLE initial_checks (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+-- SQL schema for Service Reports Master Table
+CREATE TABLE service_reports (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+-- SQL schema for Printable Reports Master Table
+CREATE TABLE printable_reports (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+-- SQL schema for Risk Agreements Master Table
+CREATE TABLE risk_agreements (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+-- SQL schema for Store Item Categories Master Table
+CREATE TABLE store_item_categories (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+-- SQL schema for Quality Checks Master Table
+CREATE TABLE quality_checks (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+-- SQL schema for Currencies Master Table
+CREATE TABLE currencies (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    symbol VARCHAR(10) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+-- SQL schema for Print Sizes Master Table
+CREATE TABLE print_sizes (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    height DECIMAL(10, 2) NOT NULL,
+    width DECIMAL(10, 2) NOT NULL,
+    remarks TEXT DEFAULT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+-- SQL schema for Device Models Master Table
+CREATE TABLE device_models (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    company_id INT NOT NULL, -- FK to Device Companies
+    name VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (company_id) REFERENCES device_companies(id) ON DELETE CASCADE
+);
+
+-- SQL schema for Service Customers Master Table
+CREATE TABLE service_customers (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    phone VARCHAR(20) NOT NULL,
+    place VARCHAR(255) DEFAULT NULL,
+    username VARCHAR(255) NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    email VARCHAR(255) DEFAULT NULL,
+    gst_number VARCHAR(50) DEFAULT NULL,
+    opening_balance DECIMAL(10, 2) DEFAULT 0,
+    address TEXT DEFAULT NULL,
+    remarks TEXT DEFAULT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+-- SQL schema for Outside Service Centers Master Table
+CREATE TABLE outside_service_centers (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    contact_person VARCHAR(255) DEFAULT NULL,
+    phone VARCHAR(20) NOT NULL,
+    place VARCHAR(255) DEFAULT NULL,
+    email VARCHAR(255) DEFAULT NULL,
+    address TEXT DEFAULT NULL,
+    other_information TEXT DEFAULT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+-- SQL schema for Store Dealers Master Table
+CREATE TABLE store_dealers (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    phone VARCHAR(20) NOT NULL,
+    email VARCHAR(255) DEFAULT NULL,
+    place VARCHAR(255) DEFAULT NULL,
+    gst_number VARCHAR(50) DEFAULT NULL,
+    opening_balance DECIMAL(10, 2) DEFAULT 0,
+    address TEXT DEFAULT NULL,
+    other_information TEXT DEFAULT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+-- SQL schema for Vendors Master Table
+CREATE TABLE vendors (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    contact_person VARCHAR(255) DEFAULT NULL,
+    phone VARCHAR(20) NOT NULL,
+    place VARCHAR(255) DEFAULT NULL,
+    gst_number VARCHAR(50) DEFAULT NULL,
+    email VARCHAR(255) DEFAULT NULL,
+    opening_balance DECIMAL(10, 2) DEFAULT 0,
+    address TEXT DEFAULT NULL,
+    remarks TEXT DEFAULT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+-- SQL schema for Device Blacklists Master Table
+CREATE TABLE device_blacklists (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    blacklisted_date DATE NOT NULL,
+    imei VARCHAR(50) NOT NULL,
+    company_id INT NOT NULL, -- FK to Device Companies
+    model_id INT NOT NULL, -- FK to Device Models
+    contact_person VARCHAR(255) DEFAULT NULL,
+    phone VARCHAR(20) NOT NULL,
+    address TEXT DEFAULT NULL,
+    remarks TEXT DEFAULT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (company_id) REFERENCES device_companies(id) ON DELETE CASCADE,
+    FOREIGN KEY (model_id) REFERENCES device_models(id) ON DELETE CASCADE
+);
+
+-- SQL schema for Store Taxes Master Table
+CREATE TABLE store_taxes (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    percentage DECIMAL(5, 2) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+-- SQL schema for Units Master Table
+CREATE TABLE units (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    base_quantity INT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+-- SQL schema for Entry Via Options Master Table
+CREATE TABLE entry_via_options (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
