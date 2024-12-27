@@ -44,12 +44,12 @@
     --vz-vertical-menu-sub-item-color: #7c7f90;
     --vz-vertical-menu-sub-item-hover-color: #4b38b3;
     --vz-vertical-menu-sub-item-active-color: #4b38b3;
-    --vz-vertical-menu-title-color: #919da9;
+    --vz-vertical-menu-title-color: #dfe6ed;
     --vz-vertical-menu-bg-dark: #151529;
     --vz-vertical-menu-item-color-dark: #a3a6b7;
     --vz-vertical-menu-item-hover-color-dark: #fff;
     --vz-vertical-menu-item-active-color-dark: #fff;
-    --vz-vertical-menu-sub-item-color-dark: #a3a6b7;
+    --vz-vertical-menu-sub-item-color-dark: #374384;
     --vz-vertical-menu-sub-item-hover-color-dark: #fff;
     --vz-vertical-menu-sub-item-active-color-dark: #fff;
     --vz-vertical-menu-title-color-dark: #6d7080;
@@ -62,9 +62,9 @@
     --vz-topbar-user-bg-dark: #2A2A50;
     --vz-footer-bg: #fff;
     --vz-footer-color: #98a6ad;
-    --vz-topnav-bg: #fff;
-    --vz-topnav-item-color: #6d7080;
-    --vz-topnav-item-color-active: #4b38b3;
+    --vz-topnav-bg: #3066b1;
+    --vz-topnav-item-color: #e7e9ef;
+    --vz-topnav-item-color-active: #d3cfe7;
     --vz-twocolumn-menu-iconview-bg: #fff;
     --vz-twocolumn-menu-bg: #fff;
     --vz-twocolumn-menu-iconview-bg-dark: var(--vz-vertical-menu-bg-dark);
@@ -100,7 +100,7 @@
 :root .menu-dropdown,
 :root .ql-toolbar,
 :root .select2-container {
-    --vz-choices-bg: #fff;
+    --vz-choices-bg: #3066b1;
     --vz-choices-link-color: #212529;
     --vz-choices-link-hover-bg: #f3f6f9;
     --vz-choices-link-active-color: #1e2125
