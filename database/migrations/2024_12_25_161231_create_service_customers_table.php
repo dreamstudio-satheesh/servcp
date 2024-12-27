@@ -16,8 +16,8 @@ return new class extends Migration
             $table->string('name');
             $table->string('phone');
             $table->string('place')->nullable();
-            $table->string('username')->unique();
-            $table->string('password');
+            $table->string('username')->nullable();
+            $table->string('password')->nullable();
             $table->string('email')->nullable();
             $table->string('gst_number')->nullable();
             $table->float('opening_balance')->nullable();

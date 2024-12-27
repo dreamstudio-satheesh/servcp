@@ -11,12 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        // Database Backups Table
-        Schema::create('database_backups', function (Blueprint $table) {
+        Schema::create('services_job_physical_conditions', function (Blueprint $table) {
             $table->id();
-            //$table->foreignId('tenant_id')->constrained('tenants')->onDelete('cascade');
-            $table->string('file_path');
-            $table->foreignId('created_by')->constrained('users')->onDelete('cascade');
+            $table->foreignId('service_job_id')->constrained('services_jobs')->onDelete('cascade');
+            $table->foreignId('physical_condition_id')->constrained('device_physical_conditions')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -26,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('database_backups');
+        Schema::dropIfExists('services_job_physical_conditions');
     }
 };
