@@ -49,7 +49,24 @@
                                     <!-- Cust. Entry Tab -->
                                     <div class="tab-pane fade show active" id="v-pills-cust-entry" role="tabpanel" aria-labelledby="v-pills-cust-entry-tab">
                                         <div>
-                                            <h5>Customer Information</h5>
+                                            <div class="row g-4 align-items-center">
+                                                <div class="col-sm">
+                                                    <h5>Customer Information</h5>
+                                                </div>
+                                                <div class="col-sm-auto">
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio" name="customerType" id="customer" value="customer" checked>
+                                                            <label class="form-check-label" for="customer">Customer</label>
+                                                        </div>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio" name="customerType" id="dealer" value="dealer">
+                                                            <label class="form-check-label" for="dealer">Dealer</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
                                             <div class="row">
                                                 <div class="col-md-4">
                                                     <label for="phone">Phone*</label>
