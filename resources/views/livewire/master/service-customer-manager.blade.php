@@ -5,14 +5,14 @@
             <div class="card">
                 <div class="card-header">
                     <h5>Service Customers</h5>
-                    <input wire:model.debounce.300ms="search" type="text" class="form-control" placeholder="Search Service Customers...">
+                    <input wire:model.live.debounce.300ms="search" type="text" class="form-control" placeholder="Search Service Customers...">
                 </div>
                 <div class="card-body">
                     @if (session()->has('message'))
-                        <div id="alert-message" class="alert alert-success alert-dismissible fade show" role="alert">
-                            {{ session('message') }}
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>
+                    <div id="alert-message" class="alert alert-success alert-dismissible fade show" role="alert">
+                        {{ session('message') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
                     @endif
 
                     <table class="table table-bordered">
@@ -57,6 +57,33 @@
                 </div>
                 <div class="card-body">
                     <form wire:submit.prevent="store">
+                        <div class="form-group">
+                            <label for="customerType">Customer Type</label>
+                            <div class="d-flex align-items-center">
+                                <div class="form-check form-check-inline">
+                                    <input
+                                        class="form-check-input"
+                                        type="radio"
+                                        name="customerType"
+                                        id="customer"
+                                        value="Customer"
+                                        wire:model="customer_type">
+                                    <label class="form-check-label" for="customer">Customer</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input
+                                        class="form-check-input"
+                                        type="radio"
+                                        name="customerType"
+                                        id="dealer"
+                                        value="Dealer"
+                                        wire:model="customer_type">
+                                    <label class="form-check-label" for="dealer">Dealer</label>
+                                </div>
+                            </div>
+                            @error('customer_type') <span class="text-danger">{{ $message }}</span> @enderror
+                        </div>
+
                         <div class="form-group">
                             <label>Name</label>
                             <input type="text" class="form-control" wire:model="name">

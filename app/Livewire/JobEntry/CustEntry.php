@@ -15,7 +15,7 @@ class CustEntry extends Component
 
     // Selected customer info
     public $customerId;
-    public $customerType = 'customer';
+    public $customer_type = 'Customer';
     public $phone;
     public $name;
     public $place;
@@ -28,6 +28,8 @@ class CustEntry extends Component
     // Validation rules
     protected $rules = [
         'phone' => 'required',
+        'name' => 'required',
+        'customer_type' => 'required',
         'email' => 'nullable|email',
         // ...
     ];
@@ -67,14 +69,17 @@ class CustEntry extends Component
         if ($customer) {
             $this->customerId = $customer->id;
             $this->phone      = $customer->phone;
-            $this->name       = $customer->name;
             $this->place      = $customer->place;
+            $this->name       = $customer->name;
+            $this->customer_type = $customer->customer_type;
             $this->email      = $customer->email;
             $this->address    = $customer->address;
 
             // Load previous jobs (assuming relationship or separate query)
             $this->previousJobs = $customer->jobs()->orderBy('entry_date_time', 'desc')->get();
         }
+
+        $this->dispatch('updateCustomerId', $customer->id);
     }
 
     /**
@@ -90,6 +95,7 @@ class CustEntry extends Component
             [
                 'phone'   => $this->phone,
                 'name'    => $this->name,
+                'customer_type'=> $this->customer_type,
                 'place'   => $this->place,
                 'email'   => $this->email,
                 'address' => $this->address,
@@ -97,9 +103,17 @@ class CustEntry extends Component
         );
 
         // If newly created, set the ID
-        $this->customerId = $customer->id;
+        if ($customer) {
+            $this->customerId = $customer->id;
+            $this->dispatch('updateCustomerId', $customer->id);
+            session()->flash('message', 'Customer data saved!');
+        }
+        else{
+            session()->flash('message', 'Something wrong to create customer!');
+        }
+        
 
-        session()->flash('message', 'Customer data saved!');
+       
     }
 
     public function render()

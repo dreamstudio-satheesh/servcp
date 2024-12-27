@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('phone');
+            $table->enum('customer_type', ['Customer', 'Dealer'])->default('Customer');
             $table->string('place')->nullable();
             $table->string('username')->nullable();
             $table->string('password')->nullable();

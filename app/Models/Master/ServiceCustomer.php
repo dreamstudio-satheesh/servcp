@@ -8,7 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class ServiceCustomer extends Model
 {
-    protected $guarded = ['id'];
+    protected $fillable = [
+        'name', 'phone', 'place', 'username', 'password', 'email',
+        'gst_number', 'opening_balance', 'address', 'remarks', 'customer_type'
+    ];
+    
 
 
     public function jobs()

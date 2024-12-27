@@ -13,6 +13,7 @@ class ServiceCustomerManager extends Component
     public $customerId;
     public $name;
     public $phone;
+    public $customer_type = 'Customer';
     public $place;
     public $username;
     public $password;
@@ -28,8 +29,9 @@ class ServiceCustomerManager extends Component
     protected $rules = [
         'name' => 'required|string|max:255',
         'phone' => 'required|string|max:20',
-        'username' => 'required|string|max:255|unique:service_customers,username',
-        'password' => 'required|string|min:6',
+        'customer_type' => 'required|in:Customer,Dealer',
+        'username' => 'nullable|string|max:255|unique:service_customers,username',
+        'password' => 'nullable|string|min:6',
         'email' => 'nullable|email|max:255',
         'gst_number' => 'nullable|string|max:50',
         'opening_balance' => 'nullable|numeric|min:0',
@@ -52,6 +54,7 @@ class ServiceCustomerManager extends Component
         $this->customerId = null;
         $this->name = '';
         $this->phone = '';
+        $this->customer_type = 'Customer';
         $this->place = '';
         $this->username = '';
         $this->password = '';
@@ -69,6 +72,7 @@ class ServiceCustomerManager extends Component
         ServiceCustomer::updateOrCreate(['id' => $this->customerId], [
             'name' => $this->name,
             'phone' => $this->phone,
+            'customer_type' => $this->customer_type,
             'place' => $this->place,
             'username' => $this->username,
             'password' => bcrypt($this->password),
@@ -89,6 +93,7 @@ class ServiceCustomerManager extends Component
         $this->customerId = $customer->id;
         $this->name = $customer->name;
         $this->phone = $customer->phone;
+        $this->customer_type = $customer->customer_type;
         $this->place = $customer->place;
         $this->username = $customer->username;
         $this->password = ''; // Password not editable directly

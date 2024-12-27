@@ -12,7 +12,9 @@
                                 <div class="nav flex-column custom-nav nav-pills"
                                      role="tablist"
                                      aria-orientation="vertical">
-                                    <button class="nav-link active"
+                                    <button class="nav-link 
+                                    @if($customerId) active @endif
+                                    "
                                             id="v-pills-cust-entry-tab"
                                             data-bs-toggle="pill"
                                             data-bs-target="#v-pills-cust-entry"
@@ -93,7 +95,7 @@
                                          id="v-pills-general"
                                          role="tabpanel"
                                          aria-labelledby="v-pills-general-tab">
-                                        @livewire('job-entry.general')
+                                         @livewire('job-entry.general')
                                     </div>
 
                                     <!-- Initial Check Tab -->

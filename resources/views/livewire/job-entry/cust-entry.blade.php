@@ -46,10 +46,10 @@
                 <div class="form-check form-check-inline">
                     <input class="form-check-input"
                         type="radio"
-                        name="customerType"
+                        name="customer_type"
                         id="customer"
-                        value="customer"
-                        wire:model="customerType">
+                        value="Customer"
+                        wire:model="customer_type">
                     <label class="form-check-label" for="customer">
                         Customer
                     </label>
@@ -57,10 +57,10 @@
                 <div class="form-check form-check-inline">
                     <input class="form-check-input"
                         type="radio"
-                        name="customerType"
+                        name="customer_type"
                         id="dealer"
-                        value="dealer"
-                        wire:model="customerType">
+                        value="Dealer"
+                        wire:model="customer_type">
                     <label class="form-check-label" for="dealer">
                         Dealer
                     </label>
@@ -72,6 +72,17 @@
     <!-- Form -->
     <form wire:submit.prevent="submitForm">
         <div class="row">
+
+            <!-- Name -->
+            <div class="col-md-4 mb-3">
+                <label for="name">Name</label>
+                <input type="text"
+                    id="name"
+                    class="form-control"
+                    placeholder="Name"
+                    wire:model.defer="name">
+            </div>
+
             <!-- Phone -->
             <div class="col-md-4 mb-3">
                 <label for="phone">Phone*</label>
@@ -86,16 +97,6 @@
                     {{ $message }}
                 </div>
                 @enderror
-            </div>
-
-            <!-- Name -->
-            <div class="col-md-4 mb-3">
-                <label for="name">Name</label>
-                <input type="text"
-                    id="name"
-                    class="form-control"
-                    placeholder="Name"
-                    wire:model.defer="name">
             </div>
 
             <!-- Place -->

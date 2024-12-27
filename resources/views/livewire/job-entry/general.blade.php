@@ -1,6 +1,6 @@
 <div>
     <div class="card">
-        <h5>Job Information</h5>
+        <h5>Job Information {{$customerId}}</h5>
         <div class="card-body">
 
             <div class="row mb-3">
