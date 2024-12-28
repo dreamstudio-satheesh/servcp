@@ -190,7 +190,7 @@ sudo nano /etc/redis/redis.conf
 sudo systemctl restart redis
 
 # Step 4: Enable Redis on System Startup
-sudo systemctl enable redis
+sudo systemctl enable redis-server
 
 # Step 5: Verify Redis Installation
 # Test Redis with the CLI tool:
