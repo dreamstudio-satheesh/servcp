@@ -5,7 +5,7 @@
 <head>
 
     <meta charset="utf-8" />
-    <title>Services Central Pro |  Admin Panel</title>
+    <title>Services Central Pro | Admin Panel</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="admin" name="description" />
     <meta content="dream coderz" name="author" />
@@ -23,7 +23,12 @@
     <!-- custom Css-->
     <link href="{{ assets('/assets/css/custom.min.css') }}" rel="stylesheet" type="text/css" />
 
+    <!-- Select2 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
     @livewireStyles
+
+    @stack('styles')
 
 </head>
 
@@ -45,8 +50,7 @@
                     <div class="modal-body">
                         <div class="mt-2 text-center">
                             <lord-icon src="https://cdn.lordicon.com/gsqxdxog.json" trigger="loop"
-                                colors="primary:#f7b84b,secondary:#f06548"
-                                style="width:100px;height:100px"></lord-icon>
+                                colors="primary:#f7b84b,secondary:#f06548" style="width:100px;height:100px"></lord-icon>
                             <div class="mt-4 pt-2 fs-15 mx-4 mx-sm-5">
                                 <h4>Are you sure ?</h4>
                                 <p class="text-muted mx-4 mb-0">Are you sure you want to remove this Notification ?</p>
@@ -76,7 +80,7 @@
             <div class="page-content">
                 <div class="container-fluid">
 
-                {{ $slot }}
+                    {{ $slot }}
                 </div>
                 <!-- container-fluid -->
             </div>
@@ -145,8 +149,8 @@
                     <div class="row">
                         <div class="col-4">
                             <div class="form-check card-radio">
-                                <input id="customizer-layout01" name="data-layout" type="radio"
-                                    value="vertical" class="form-check-input">
+                                <input id="customizer-layout01" name="data-layout" type="radio" value="vertical"
+                                    class="form-check-input">
                                 <label class="form-check-label p-0 avatar-md w-100 shadow-sm"
                                     for="customizer-layout01">
                                     <span class="d-flex gap-1 h-100">
@@ -171,8 +175,8 @@
                         </div>
                         <div class="col-4">
                             <div class="form-check card-radio">
-                                <input id="customizer-layout02" name="data-layout" type="radio"
-                                    value="horizontal" class="form-check-input">
+                                <input id="customizer-layout02" name="data-layout" type="radio" value="horizontal"
+                                    class="form-check-input">
                                 <label class="form-check-label p-0 avatar-md w-100 shadow-sm"
                                     for="customizer-layout02">
                                     <span class="d-flex h-100 flex-column gap-1">
@@ -190,8 +194,8 @@
                         </div>
                         <div class="col-4">
                             <div class="form-check card-radio">
-                                <input id="customizer-layout03" name="data-layout" type="radio"
-                                    value="twocolumn" class="form-check-input">
+                                <input id="customizer-layout03" name="data-layout" type="radio" value="twocolumn"
+                                    class="form-check-input">
                                 <label class="form-check-label p-0 avatar-md w-100 shadow-sm"
                                     for="customizer-layout03">
                                     <span class="d-flex gap-1 h-100">
@@ -239,8 +243,7 @@
                                         <span class="d-flex gap-1 h-100">
                                             <span class="flex-shrink-0">
                                                 <span class="bg-light d-flex h-100 flex-column gap-1 p-1">
-                                                    <span
-                                                        class="d-block p-1 px-2 bg-soft-primary rounded mb-2"></span>
+                                                    <span class="d-block p-1 px-2 bg-soft-primary rounded mb-2"></span>
                                                     <span class="d-block p-1 px-2 pb-0 bg-soft-primary"></span>
                                                     <span class="d-block p-1 px-2 pb-0 bg-soft-primary"></span>
                                                     <span class="d-block p-1 px-2 pb-0 bg-soft-primary"></span>
@@ -301,8 +304,7 @@
                                         <span class="d-flex gap-1 h-100">
                                             <span class="flex-shrink-0">
                                                 <span class="bg-light d-flex h-100 flex-column gap-1 p-1">
-                                                    <span
-                                                        class="d-block p-1 px-2 bg-soft-primary rounded mb-2"></span>
+                                                    <span class="d-block p-1 px-2 bg-soft-primary rounded mb-2"></span>
                                                     <span class="d-block p-1 px-2 pb-0 bg-soft-primary"></span>
                                                     <span class="d-block p-1 px-2 pb-0 bg-soft-primary"></span>
                                                     <span class="d-block p-1 px-2 pb-0 bg-soft-primary"></span>
@@ -328,8 +330,7 @@
                                         <span class="d-flex gap-1 h-100 border-start border-end">
                                             <span class="flex-shrink-0">
                                                 <span class="bg-light d-flex h-100 flex-column gap-1 p-1">
-                                                    <span
-                                                        class="d-block p-1 px-2 bg-soft-primary rounded mb-2"></span>
+                                                    <span class="d-block p-1 px-2 bg-soft-primary rounded mb-2"></span>
                                                     <span class="d-block p-1 px-2 pb-0 bg-soft-primary"></span>
                                                     <span class="d-block p-1 px-2 pb-0 bg-soft-primary"></span>
                                                     <span class="d-block p-1 px-2 pb-0 bg-soft-primary"></span>
@@ -360,8 +361,7 @@
 
                             <input type="radio" class="btn-check" name="data-layout-position"
                                 id="layout-position-scrollable" value="scrollable">
-                            <label class="btn btn-light w-sm ms-0"
-                                for="layout-position-scrollable">Scrollable</label>
+                            <label class="btn btn-light w-sm ms-0" for="layout-position-scrollable">Scrollable</label>
                         </div>
                     </div>
                     <h6 class="mt-4 mb-0 fw-semibold text-uppercase fs-12">Topbar Color</h6>
@@ -398,8 +398,7 @@
                             <div class="form-check card-radio">
                                 <input class="form-check-input" type="radio" name="data-topbar"
                                     id="topbar-color-dark" value="dark">
-                                <label class="form-check-label p-0 avatar-md w-100 shadow-sm"
-                                    for="topbar-color-dark">
+                                <label class="form-check-label p-0 avatar-md w-100 shadow-sm" for="topbar-color-dark">
                                     <span class="d-flex gap-1 h-100">
                                         <span class="flex-shrink-0">
                                             <span class="bg-light d-flex h-100 flex-column gap-1 p-1">
@@ -436,8 +435,7 @@
                                         <span class="d-flex gap-1 h-100">
                                             <span class="flex-shrink-0">
                                                 <span class="bg-light d-flex h-100 flex-column gap-1 p-1">
-                                                    <span
-                                                        class="d-block p-1 px-2 bg-soft-primary rounded mb-2"></span>
+                                                    <span class="d-block p-1 px-2 bg-soft-primary rounded mb-2"></span>
                                                     <span class="d-block p-1 px-2 pb-0 bg-soft-primary"></span>
                                                     <span class="d-block p-1 px-2 pb-0 bg-soft-primary"></span>
                                                     <span class="d-block p-1 px-2 pb-0 bg-soft-primary"></span>
@@ -552,8 +550,7 @@
                                         <span class="d-flex gap-1 h-100">
                                             <span class="flex-shrink-0">
                                                 <span class="bg-light d-flex h-100 flex-column gap-1 p-1">
-                                                    <span
-                                                        class="d-block p-1 px-2 bg-soft-primary rounded mb-2"></span>
+                                                    <span class="d-block p-1 px-2 bg-soft-primary rounded mb-2"></span>
                                                     <span class="d-block p-1 px-2 pb-0 bg-soft-primary"></span>
                                                     <span class="d-block p-1 px-2 pb-0 bg-soft-primary"></span>
                                                     <span class="d-block p-1 px-2 pb-0 bg-soft-primary"></span>
@@ -613,8 +610,7 @@
                                         <span class="d-flex gap-1 h-100">
                                             <span class="flex-shrink-0">
                                                 <span class="bg-white border-end d-flex h-100 flex-column gap-1 p-1">
-                                                    <span
-                                                        class="d-block p-1 px-2 bg-soft-primary rounded mb-2"></span>
+                                                    <span class="d-block p-1 px-2 bg-soft-primary rounded mb-2"></span>
                                                     <span class="d-block p-1 px-2 pb-0 bg-soft-primary"></span>
                                                     <span class="d-block p-1 px-2 pb-0 bg-soft-primary"></span>
                                                     <span class="d-block p-1 px-2 pb-0 bg-soft-primary"></span>
@@ -787,8 +783,7 @@
                                         <span class="d-flex gap-1 h-100">
                                             <span class="flex-shrink-0">
                                                 <span class="bg-light d-flex h-100 flex-column gap-1 p-1">
-                                                    <span
-                                                        class="d-block p-1 px-2 bg-soft-primary rounded mb-2"></span>
+                                                    <span class="d-block p-1 px-2 bg-soft-primary rounded mb-2"></span>
                                                     <span class="d-block p-1 px-2 pb-0 bg-soft-primary"></span>
                                                     <span class="d-block p-1 px-2 pb-0 bg-soft-primary"></span>
                                                     <span class="d-block p-1 px-2 pb-0 bg-soft-primary"></span>
@@ -802,10 +797,8 @@
                                             </span>
                                         </span>
                                         <!-- <div id="preloader"> -->
-                                        <div id="status"
-                                            class="d-flex align-items-center justify-content-center">
-                                            <div class="spinner-border text-primary avatar-xxs m-auto"
-                                                role="status">
+                                        <div id="status" class="d-flex align-items-center justify-content-center">
+                                            <div class="spinner-border text-primary avatar-xxs m-auto" role="status">
                                                 <span class="visually-hidden">Loading...</span>
                                             </div>
                                         </div>
@@ -822,8 +815,7 @@
                                         <span class="d-flex gap-1 h-100">
                                             <span class="flex-shrink-0">
                                                 <span class="bg-light d-flex h-100 flex-column gap-1 p-1">
-                                                    <span
-                                                        class="d-block p-1 px-2 bg-soft-primary rounded mb-2"></span>
+                                                    <span class="d-block p-1 px-2 bg-soft-primary rounded mb-2"></span>
                                                     <span class="d-block p-1 px-2 pb-0 bg-soft-primary"></span>
                                                     <span class="d-block p-1 px-2 pb-0 bg-soft-primary"></span>
                                                     <span class="d-block p-1 px-2 pb-0 bg-soft-primary"></span>
@@ -852,7 +844,7 @@
         <div class="offcanvas-footer border-top p-3 text-center">
             <div class="row">
                 <div class="col-6">
-                   
+
                 </div>
                 <div class="col-6">
                     <button type="button" class="btn btn-primary w-100" id="reset-layout">Reset</button>
@@ -872,18 +864,17 @@
     <!-- App js -->
     <script src="{{ assets('/assets/js/app.js') }}"></script>
 
-    @livewireScripts
     
-    <script>
-        document.addEventListener('livewire:load', function () {
-            const alertMessage = document.getElementById('alert-message');
-            if (alertMessage) {
-                setTimeout(() => {
-                    alertMessage.style.display = 'none';
-                }, 3000); // Hides after 3 seconds
-            }
-        });
-    </script>
+
+    @livewireScripts
+
+    <!-- jQuery (required for Select2) -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+    <!-- Select2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+    @stack('scripts')
 </body>
 
 </html>
