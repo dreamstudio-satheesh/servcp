@@ -208,10 +208,21 @@ sudo nano /etc/netplan/01-netcfg.yaml
 network:
   version: 2
   ethernets:
+    eth0:
+      dhcp4: true
+      dhcp6: true
     enp7s0:
       addresses:
         - 10.0.0.3/24
-        - 10.0.0.4/24
+      dhcp4: false
+      routes:
+        - to: default
+          via: 10.0.0.1
+      nameservers:
+        addresses:
+          - 8.8.8.8
+          - 8.8.4.4
+
 
 # Step 2: Apply the Configuration
 sudo netplan apply
