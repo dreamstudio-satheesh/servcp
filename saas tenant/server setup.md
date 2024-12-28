@@ -99,7 +99,7 @@ upstream backend {
 
 server {
     listen 80;
-    server_name servicecentralpro.com;
+    server_name servcp.com;
 
     location / {
         proxy_pass http://backend;
@@ -120,20 +120,20 @@ sudo systemctl reload nginx
 
 echo "Nginx is configured as a load balancer."
 
-# How to Install a DNS-Based SSL Certificate for servicecentralpro.com Domain
+# How to Install a DNS-Based SSL Certificate for servcp.com Domain
 
 # Step 1: Install Certbot and Nginx Plugin
 sudo apt install certbot python3-certbot-nginx -y
 
 # Step 2: Obtain SSL Certificate with DNS Validation
 sudo certbot certonly --manual --preferred-challenges=dns \
-    -d servicecentralpro.com -d *.servicecentralpro.com \
-    --agree-tos --email admin@servicecentralpro.com
+    -d servcp.com -d *.servcp.com \
+    --agree-tos --email admin@servcp.com
 
 # Step 3: Add DNS TXT Record
 # Certbot will prompt you to add a TXT record. Follow the instructions.
 # Example:
-# _acme-challenge.servicecentralpro.com TXT "random-value"
+# _acme-challenge.servcp.com TXT "random-value"
 # Wait for DNS propagation, then press Enter in Certbot.
 
 # Step 4: Configure Nginx for SSL
@@ -145,10 +145,10 @@ upstream backend {
 
 server {
     listen 443 ssl;
-    server_name servicecentralpro.com *.servicecentralpro.com;
+    server_name servcp.com *.servcp.com;
 
-    ssl_certificate /etc/letsencrypt/live/servicecentralpro.com/fullchain.pem;
-    ssl_certificate_key /etc/letsencrypt/live/servicecentralpro.com/privkey.pem;
+    ssl_certificate /etc/letsencrypt/live/servcp.com/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/servcp.com/privkey.pem;
 
     location / {
         proxy_pass http://backend;
@@ -165,7 +165,7 @@ sudo systemctl reload nginx
 
 # Step 5: Test SSL Configuration
 sudo certbot renew --dry-run
-echo "DNS-based SSL certificate for servicecentralpro.com is installed."
+echo "DNS-based SSL certificate for servcp.com is installed."
 
 # How to Install Redis
 
