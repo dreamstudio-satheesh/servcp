@@ -69,9 +69,6 @@ echo "After testing, remove the test file for security: sudo rm /var/www/html/in
 # Laravel Required Extensions Installed
 echo "Apache, PHP 8.4, and all required PHP extensions for Laravel are installed."
 
-
-
-
 # Step 10: Add New Server to Load Balancer
 # Edit Nginx Configuration on Load Balancer
 echo "To add a new server to the load balancer, follow these steps:"
@@ -100,12 +97,10 @@ upstream backend {
     server 10.0.0.4;
 }
 
-# Handle HTTP requests (Port 80)
 server {
     listen 80;
-    server_name servcp.com *.servcp.com;
+    server_name servicecentralpro.com;
 
-    # Serve HTTP requests without redirecting to HTTPS
     location / {
         proxy_pass http://backend;
         proxy_set_header Host $host;
@@ -125,20 +120,20 @@ sudo systemctl reload nginx
 
 echo "Nginx is configured as a load balancer."
 
-# How to Install a DNS-Based SSL Certificate for servcp.com Domain
+# How to Install a DNS-Based SSL Certificate for servicecentralpro.com Domain
 
 # Step 1: Install Certbot and Nginx Plugin
 sudo apt install certbot python3-certbot-nginx -y
 
 # Step 2: Obtain SSL Certificate with DNS Validation
 sudo certbot certonly --manual --preferred-challenges=dns \
-    -d servcp.com -d *.servcp.com \
-    --agree-tos --email admin@servcp.com
+    -d servicecentralpro.com -d *.servicecentralpro.com \
+    --agree-tos --email admin@servicecentralpro.com
 
 # Step 3: Add DNS TXT Record
 # Certbot will prompt you to add a TXT record. Follow the instructions.
 # Example:
-# _acme-challenge.servcp.com TXT "random-value"
+# _acme-challenge.servicecentralpro.com TXT "random-value"
 # Wait for DNS propagation, then press Enter in Certbot.
 
 # Step 4: Configure Nginx for SSL
@@ -150,10 +145,10 @@ upstream backend {
 
 server {
     listen 443 ssl;
-    server_name servcp.com *.servcp.com;
+    server_name servicecentralpro.com *.servicecentralpro.com;
 
-    ssl_certificate /etc/letsencrypt/live/servcp.com/fullchain.pem;
-    ssl_certificate_key /etc/letsencrypt/live/servcp.com/privkey.pem;
+    ssl_certificate /etc/letsencrypt/live/servicecentralpro.com/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/servicecentralpro.com/privkey.pem;
 
     location / {
         proxy_pass http://backend;
@@ -170,4 +165,51 @@ sudo systemctl reload nginx
 
 # Step 5: Test SSL Configuration
 sudo certbot renew --dry-run
-echo "DNS-based SSL certificate for servcp.com is installed."
+echo "DNS-based SSL certificate for servicecentralpro.com is installed."
+
+# How to Install Redis
+
+# Step 1: Update the System
+sudo apt update && sudo apt upgrade -y
+
+# Step 2: Install Redis Server
+sudo apt install redis-server -y
+
+# Step 3: Configure Redis
+# Open the Redis configuration file:
+sudo nano /etc/redis/redis.conf
+# Update the following settings as needed:
+# - Set "supervised" to "systemd" (for modern systems):
+#   supervised systemd
+
+# Save the file and restart Redis:
+sudo systemctl restart redis
+
+# Step 4: Enable Redis on System Startup
+sudo systemctl enable redis
+
+# Step 5: Verify Redis Installation
+# Test Redis with the CLI tool:
+redis-cli ping
+# It should return: PONG
+
+echo "Redis is installed and configured."
+
+# How to Configure Additional IP Addresses with Netplan (Ubuntu)
+
+# Step 1: Edit the Netplan Configuration File
+sudo nano /etc/netplan/01-netcfg.yaml
+
+# Example Configuration:
+network:
+  version: 2
+  ethernets:
+    enp7s0:
+      addresses:
+        - 10.0.0.3/24
+        - 10.0.0.4/24
+
+# Step 2: Apply the Configuration
+sudo netplan apply
+
+echo "Netplan configuration updated with additional IP addresses."
