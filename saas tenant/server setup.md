@@ -99,7 +99,7 @@ upstream backend {
 
 server {
     listen 80;
-    server_name servcp.com;
+    server_name servcp.com *.servcp.com;
 
     location / {
         proxy_pass http://backend;
@@ -110,6 +110,10 @@ server {
     }
 }
 EOF'
+
+sudo rm /etc/nginx/sites-enabled/default
+sudo rm /etc/nginx/sites-available/default
+
 
 sudo ln -s /etc/nginx/sites-available/load-balancer /etc/nginx/sites-enabled/
 sudo systemctl restart nginx
