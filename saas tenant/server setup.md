@@ -207,21 +207,38 @@ sudo nano /etc/netplan/01-netcfg.yaml
 # Example Configuration:
 network:
   version: 2
+  renderer: networkd
   ethernets:
     eth0:
-      dhcp4: true
-      dhcp6: true
-    enp7s0:
       addresses:
-        - 10.0.0.3/24
-      dhcp4: false
+        - 192.168.0.250/32
+        - 2001:db8:1234::1/64
       routes:
-        - to: default
-          via: 10.0.0.1
+        - to: 0.0.0.0/0
+          via: 192.168.0.1
+          on-link: true
+          metric: 100  # Lower metric, higher priority
+        - to: ::/0
+          via: fe80::1
+          metric: 100
       nameservers:
         addresses:
           - 8.8.8.8
-          - 8.8.4.4
+          - 2001:4860:4860::8888
+
+    enp7s0:
+      addresses:
+        - 10.0.0.3/24
+        - 2001:db8:abcd::3/64
+      dhcp4: false
+      routes:
+        - to: 0.0.0.0/0
+          via: 10.0.0.1
+          metric: 200  # Higher metric, lower priority
+        - to: ::/0
+          via: fe80::2
+          metric: 200
+
 
 
 # Step 2: Apply the Configuration
