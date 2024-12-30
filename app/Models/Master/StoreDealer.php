@@ -2,9 +2,10 @@
 
 namespace App\Models\Master;
 
+use App\Models\TenantModel;
 use Illuminate\Database\Eloquent\Model;
 
-class StoreDealer extends Model
+class StoreDealer extends TenantModel
 {
     protected $guarded = ['id'];
 }

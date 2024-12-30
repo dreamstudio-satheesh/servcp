@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class JournalEntryLine extends Model
+class JournalEntryLine extends TenantModel
 {
     protected $fillable = ['journal_entry_id', 'account_id', 'debit_amount', 'credit_amount'];
 

@@ -62,6 +62,14 @@ return [
             ]) : [],
         ],
 
+        'tenant' => [ // Tenant-specific connection
+            'driver' => 'mysql',
+            'host' => env('DB_HOST', '127.0.0.1'),
+            'database' => '', // Dynamic database name set at runtime
+            'username' => env('DB_USERNAME', 'root'),
+            'password' => env('DB_PASSWORD', ''),
+        ],
+
         'mariadb' => [
             'driver' => 'mariadb',
             'url' => env('DB_URL'),

@@ -12,7 +12,10 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware) {
         
-        $middleware->appendToGroup('web', \App\Http\Middleware\HandlePageExpired::class);
+        $middleware->appendToGroup('web', [
+            \App\Http\Middleware\HandlePageExpired::class,
+           // \App\Http\Middleware\DetectSubdomain::class,
+         ]);
 
         $middleware->alias([
             

@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Master\DevicePhysicalCondition;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class ServiceJob extends Model
+class ServiceJob extends TenantModel
 {
     use HasFactory;
 

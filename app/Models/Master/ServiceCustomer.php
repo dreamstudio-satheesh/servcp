@@ -4,9 +4,10 @@ namespace App\Models\Master;
 
 
 use App\Models\ServiceJob;
+use App\Models\TenantModel;
 use Illuminate\Database\Eloquent\Model;
 
-class ServiceCustomer extends Model
+class ServiceCustomer extends TenantModel
 {
     protected $fillable = [
         'name', 'phone', 'place', 'username', 'password', 'email',
