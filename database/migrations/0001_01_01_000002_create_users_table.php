@@ -11,14 +11,31 @@ return new class extends Migration
      */
     public function up(): void
     {
-         // Users Table
-         Schema::create('users', function (Blueprint $table) {
+        // Users Table
+        Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
-            $table->foreignId('role_id')->constrained('roles')->onDelete('cascade');
+            $table->string('phone')->nullable();
+            $table->enum('gender', ['Male', 'Female'])->nullable();
+            $table->integer('age')->nullable();
+            $table->string('blood_group')->nullable();
+            $table->string('designation')->nullable();
+            $table->string('qualification')->nullable();
+            $table->string('salary_type')->nullable();
+            $table->decimal('salary', 10, 2)->nullable();
+            $table->decimal('opening_balance', 10, 2)->default(0);
+            $table->text('address')->nullable();
+            $table->date('ending_date')->nullable();
+            $table->text('description')->nullable();
+            $table->string('photo')->nullable();
+            $table->string('id_card')->nullable();
+            $table->string('resume')->nullable();
+            $table->boolean('status')->default(true);
             $table->foreignId('branch_id')->nullable()->constrained('branches')->onDelete('set null');
+            $table->foreignId('role_id')->constrained('roles')->onDelete('cascade');
+            //$table->foreignId('branch_id')->nullable()->constrained('branches')->onDelete('set null');
             $table->timestamps();
         });
 

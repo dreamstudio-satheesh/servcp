@@ -5,7 +5,7 @@
             <div class="card">
                 <div class="card-header">
                     <h5>Currencies</h5>
-                    <input wire:model.debounce.300ms="search" type="text" class="form-control" placeholder="Search Currencies...">
+                    <input wire:model.debounce.live.300ms="search" type="text" class="form-control" placeholder="Search Currencies...">
                 </div>
                 <div class="card-body">
                     @if (session()->has('message'))

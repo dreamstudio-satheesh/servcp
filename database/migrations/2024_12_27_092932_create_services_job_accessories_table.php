@@ -13,10 +13,13 @@ return new class extends Migration
     {
         Schema::create('services_job_accessories', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('service_job_id')->constrained('services_jobs')->onDelete('cascade');
+            $table->foreignId('service_job_id')->constrained('service_jobs')->onDelete('cascade');
             $table->foreignId('device_accessory_id')->constrained('device_accessories')->onDelete('cascade');
             $table->timestamps();
+        
+            $table->unique(['service_job_id', 'device_accessory_id'],'sj_device_accessory_id');
         });
+        
     }
 
     /**

@@ -13,10 +13,13 @@ return new class extends Migration
     {
         Schema::create('services_job_risk_agreements', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('service_job_id')->constrained('services_jobs')->onDelete('cascade');
+            $table->foreignId('service_job_id')->constrained('service_jobs')->onDelete('cascade');
             $table->foreignId('risk_agreement_id')->constrained('risk_agreements')->onDelete('cascade');
             $table->timestamps();
+        
+            $table->unique(['service_job_id', 'risk_agreement_id'],'sj_risk_agreement_id');
         });
+        
     }
 
     /**

@@ -13,12 +13,13 @@ return new class extends Migration
     {
         Schema::create('services_job_initial_checks', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('service_job_id')->constrained('services_jobs')->onDelete('cascade');
+            $table->foreignId('service_job_id')->constrained('service_jobs')->onDelete('cascade');
             $table->enum('display_status', ['Working', 'Not Working', 'Not Checked'])->default('Not Checked');
             $table->enum('back_panel_status', ['Working', 'Not Working', 'Not Checked'])->default('Not Checked');
             $table->enum('device_status', ['Working', 'Not Working', 'Not Checked'])->default('Not Checked');
-            // Add additional checks as required
             $table->timestamps();
+        
+            $table->index(['display_status', 'back_panel_status', 'device_status'], 'sj_initial_checks_index');
         });
     }
 

@@ -12,11 +12,11 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Master\DevicePhysicalCondition;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class ServiceJob extends TenantModel
+class ServiceJob extends Model
 {
     use HasFactory;
 
-    protected $table = 'services_jobs';
+    protected $table = 'service_jobs'; // Updated to follow Laravel naming conventions
 
     protected $fillable = [
         'job_number',
@@ -57,22 +57,21 @@ class ServiceJob extends TenantModel
 
     public function physicalConditions()
     {
-        return $this->belongsToMany(DevicePhysicalCondition::class, 'services_job_physical_conditions');
+        return $this->belongsToMany(DevicePhysicalCondition::class, 'service_job_physical_conditions');
     }
 
     public function riskAgreements()
     {
-        return $this->belongsToMany(RiskAgreement::class, 'services_job_risk_agreements');
+        return $this->belongsToMany(RiskAgreement::class, 'service_job_risk_agreements');
     }
 
     public function accessories()
     {
-        return $this->belongsToMany(DeviceAccessory::class, 'services_job_accessories');
+        return $this->belongsToMany(DeviceAccessory::class, 'service_job_accessories');
     }
 
     public function initialChecks()
     {
-        return $this->hasOne(ServicesJobInitialCheck::class);
+        return $this->hasOne(ServiceJobInitialCheck::class);
     }
 }
-

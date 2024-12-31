@@ -34,8 +34,8 @@
             <div class="row mb-3">
                 <div class="col-md-4">
                     <div class="form-group" wire:ignore>
-                        <label for="company-select">Company</label>
-                        <select id="company-select" class="form-control"  wire:model.live="selectedCompany">
+                        <label for="company-select">Select Company</label>
+                        <select id="company-select" class="form-control"  wire:model.defer="selectedCompany">
                             <option value="">Select a Company</option>
                             @foreach ($companies as $company)
                                 <option value="{{ $company->id }}">{{ $company->name }}</option>
@@ -48,17 +48,16 @@
 
                 <!-- Search Brand Model -->
                 <div class="col-md-4" >
-                    <div class="form-group">
-                        <label for="brand-model-select">Brand Model</label>
+                    <div class="form-group>
+                    <label for="brand-model-select">Search Brand
+                        Model</label>
                         <select id="brand-model-select" class="form-control" wire:model="selectedBrandModel">
                             <option value="">Select a Model</option>
-                            @foreach ($models as $model)
+                            @foreach ($brandModels as $model)
                                 <option value="{{ $model->id }}">{{ $model->name }}</option>
                             @endforeach
                         </select>
-                        @error('selectedBrandModel') <span class="text-danger">{{ $message }}</span> @enderror
                     </div>
-                    
                 </div>
 
 

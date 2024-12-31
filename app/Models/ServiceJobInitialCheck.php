@@ -5,8 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ServicesJobInitialCheck extends TenantModel
+class ServiceJobInitialCheck extends TenantModel
 {
+    protected $table = 'services_job_initial_checks';
+
     use HasFactory;
 
     protected $fillable = [

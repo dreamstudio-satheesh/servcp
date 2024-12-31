@@ -13,10 +13,15 @@ return new class extends Migration
     {
         Schema::create('services_job_physical_conditions', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('service_job_id')->constrained('services_jobs')->onDelete('cascade');
+            $table->foreignId('service_job_id')->constrained('service_jobs')->onDelete('cascade');
             $table->foreignId('physical_condition_id')->constrained('device_physical_conditions')->onDelete('cascade');
             $table->timestamps();
+        
+            // Define a shorter name for the unique index
+            $table->unique(['service_job_id', 'physical_condition_id'], 'sj_physical_condition_unique');
         });
+        
+        
     }
 
     /**

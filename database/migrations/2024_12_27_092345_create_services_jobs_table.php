@@ -11,7 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('services_jobs', function (Blueprint $table) {
+        
+        Schema::create('service_jobs', function (Blueprint $table) {
             $table->id();
             $table->string('job_number')->unique();
             $table->foreignId('customer_id')->constrained('service_customers')->onDelete('cascade');
@@ -21,14 +22,18 @@ return new class extends Migration
             $table->dateTime('entry_date_time');
             $table->string('reference_number')->nullable();
             $table->enum('warranty_status', ['On Warranty', 'Out of Warranty']);
-            $table->string('imei_serial');
+            $table->string('imei_serial', 15)->unique();
             $table->string('device_password');
             $table->string('provider_info')->nullable();
             $table->text('complaint_details');
             $table->text('other_remarks')->nullable();
             $table->enum('status', ['Pending', 'In Progress', 'Completed', 'Cancelled'])->default('Pending');
             $table->timestamps();
+        
+            $table->index(['customer_id', 'device_company_id', 'device_model_id']);
         });
+        
+        
     }
 
     /**

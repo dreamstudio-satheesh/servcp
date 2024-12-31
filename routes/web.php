@@ -115,6 +115,8 @@ use Illuminate\Support\Facades\Route;
 
     Route::get('/services/job-entry', App\Livewire\ServicesJobEntry::class)->name('services.job-entry');
 
+    Route::get('/user-management',  App\Livewire\UserManagement::class)->name('user-management');
+
     Route::fallback(function () {
         return response()->view('errors.subdomain_not_found', [], 404);
     });
