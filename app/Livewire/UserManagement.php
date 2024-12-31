@@ -8,18 +8,16 @@ use Livewire\WithFileUploads;
 use App\Models\User;
 use App\Models\Role;
 use App\Models\Branch;
+use App\Traits\ResetsFields;
 
 class UserManagement extends Component
 {
-    use WithPagination, WithFileUploads;
+    use WithPagination, WithFileUploads, ResetsFields;
 
-    public $userId;
-    public $name, $email, $password, $phone, $gender, $age, $blood_group;
+    public $userId, $name, $email, $password, $phone, $gender, $age, $blood_group;
     public $designation, $qualification, $salary_type, $salary, $opening_balance;
     public $address, $ending_date, $description, $photo, $id_card, $resume, $status;
-    public $branch_id, $role_id;
-    public $search = '';
-
+    public $branch_id, $role_id, $search = '';
     public $showForm = false;
 
     protected $paginationTheme = 'bootstrap';
@@ -28,7 +26,7 @@ class UserManagement extends Component
         'name' => 'required|string|max:255',
         'email' => 'required|email|unique:users,email',
         'password' => 'required|min:6',
-        'phone' => 'nullable|string|max:20',
+        'phone' => 'required|string|max:20',
         'gender' => 'nullable|in:Male,Female',
         'age' => 'nullable|integer|min:18|max:100',
         'blood_group' => 'nullable|string|max:3',
@@ -48,24 +46,13 @@ class UserManagement extends Component
         'role_id' => 'required|exists:roles,id',
     ];
 
-    public function createUser()
-    {
-        $this->resetInputFields();
-        $this->showForm = true; 
-    }
-
-    public function hideForm()
-    {   
-        $this->resetInputFields();
-        $this->showForm = false;
-    }
-
     public function render()
     {
         $roles = Role::all();
         $branches = Branch::all();
 
-        $users = User::where('name', 'like', '%' . $this->search . '%')
+        $users = User::with('role')
+            ->where('name', 'like', '%' . $this->search . '%')
             ->orWhere('email', 'like', '%' . $this->search . '%')
             ->orderBy('id', 'desc')
             ->paginate(10);
@@ -73,17 +60,16 @@ class UserManagement extends Component
         return view('livewire.user-management', compact('users', 'roles', 'branches'));
     }
 
-    public function resetInputFields()
+    public function createUser()
     {
-        $this->userId = null;
-        $this->name = $this->email = $this->password = $this->phone = $this->gender = '';
-        $this->age = $this->blood_group = $this->designation = $this->qualification = '';
-        $this->salary_type = $this->salary = $this->opening_balance = '';
-        $this->address = $this->ending_date = $this->description = '';
-        $this->photo = $this->id_card = $this->resume = null;
-        $this->status = true;
-        $this->branch_id = $this->role_id = null;
-       
+        $this->resetInputFields();
+        $this->showForm = true;
+    }
+
+    public function hideForm()
+    {
+        $this->resetInputFields();
+        $this->showForm = false;
     }
 
     public function store()
@@ -108,20 +94,13 @@ class UserManagement extends Component
             'status' => $this->status,
             'branch_id' => $this->branch_id,
             'role_id' => $this->role_id,
+            'opening_balance' => 0,
         ];
 
-        if ($this->photo) {
-            $data['photo'] = $this->photo->store('photos', 'public');
-        }
-        if ($this->id_card) {
-            $data['id_card'] = $this->id_card->store('id_cards', 'public');
-        }
-        if ($this->resume) {
-            $data['resume'] = $this->resume->store('resumes', 'public');
-        }
-        if ($this->password) {
-            $data['password'] = bcrypt($this->password);
-        }
+        if ($this->photo) $data['photo'] = $this->photo->store('photos', 'public');
+        if ($this->id_card) $data['id_card'] = $this->id_card->store('id_cards', 'public');
+        if ($this->resume) $data['resume'] = $this->resume->store('resumes', 'public');
+        if ($this->password) $data['password'] = bcrypt($this->password);
 
         User::updateOrCreate(['id' => $this->userId], $data);
 
@@ -153,7 +132,7 @@ class UserManagement extends Component
         $this->branch_id = $user->branch_id;
         $this->role_id = $user->role_id;
 
-        $this->showForm = true; 
+        $this->showForm = true;
     }
 
     public function delete($id)
@@ -162,4 +141,3 @@ class UserManagement extends Component
         session()->flash('message', 'User deleted successfully!');
     }
 }
-

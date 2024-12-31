@@ -170,7 +170,7 @@
                             </a>
                             <div class="collapse menu-dropdown" id="sidebarHR">
                                 <ul class="nav nav-sm flex-column">
-                                    <li class="nav-item"><a href="#" class="nav-link"
+                                    <li class="nav-item"><a href="{{ route('user-management') }}" class="nav-link"
                                             data-key="t-user-management">User Management</a></li>
                                     <li class="nav-item"><a href="#" class="nav-link"
                                             data-key="t-attendance-register">Attendance Register</a></li>
