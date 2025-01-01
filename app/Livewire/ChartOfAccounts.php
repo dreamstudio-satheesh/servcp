@@ -79,10 +79,20 @@ class ChartOfAccounts extends Component
         session()->flash('message', 'Account updated successfully.');
         $this->resetInput();
     }
+    
 
     public function delete($id)
     {
-        Account::findOrFail($id)->delete();
+        $account = Account::with('children')->findOrFail($id);
+
+        // Prevent deletion if the account is a primary account (has no parent)
+        if (is_null($account->parent_id) || $account->children->count() > 0) {
+            session()->flash('message', 'Cannot delete primary account or account with children.');
+            return;
+        }
+
+        $account->delete();
+
         session()->flash('message', 'Account deleted successfully.');
     }
 }

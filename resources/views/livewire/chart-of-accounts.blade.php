@@ -72,8 +72,8 @@
                     <tbody>
                         @foreach ($accounts as $account)
                         <tr>
-                            <td>{{ $account->code }}</td>
-                            <td>{{ $account->name }}</td>
+                            <td style="font-weight: bold;">{{ $account->code }}</td>
+                            <td style="font-weight: bold;">{{ $account->name }}</td>
                             <td>{{ $account->type }}</td>
                             <td>{{ $account->parent ? $account->parent->name : 'None' }}</td>
                             <td class="text-center">
