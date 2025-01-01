@@ -1,15 +1,8 @@
-FROM php:8.3-fpm-alpine
+# Stage 1: Build Stage
+FROM php:8.3-fpm-alpine AS builder
 
-# Set working directory
-WORKDIR /var/www/html
-
-# Install required dependencies
+# Install dependencies for building PHP extensions
 RUN apk add --no-cache \
-    nano \
-    sqlite \
-    sqlite-dev \
-    libxml2-dev \
-    oniguruma-dev \
     autoconf \
     bash \
     gcc \
@@ -18,10 +11,12 @@ RUN apk add --no-cache \
     linux-headers \
     libjpeg-turbo-dev \
     libpng-dev \
+    libxml2-dev \
     libzip-dev \
-    zlib-dev \
+    sqlite-dev \
     bison \
-    re2c && \
+    re2c \
+    zlib-dev && \
     docker-php-ext-install \
     pdo \
     pdo_sqlite \
@@ -32,10 +27,31 @@ RUN apk add --no-cache \
     pecl install redis && \
     docker-php-ext-enable redis
 
+# Stage 2: Final Image
+FROM php:8.3-fpm-alpine
+
+# Set working directory
+WORKDIR /var/www/html
+
+# Install runtime dependencies only
+RUN apk add --no-cache \
+    nano \
+    sqlite \
+    libjpeg-turbo \
+    libpng \
+    libxml2 \
+    libzip \
+    zlib && \
+    rm -rf /var/cache/apk/*
+
+# Copy compiled PHP extensions from the build stage
+COPY --from=builder /usr/local/lib/php/extensions/ /usr/local/lib/php/extensions/
+COPY --from=builder /usr/local/etc/php/conf.d /usr/local/etc/php/conf.d
+
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Set permissions for the application
+# Set permissions for Laravel
 RUN chown -R www-data:www-data /var/www/html && chmod -R 755 /var/www/html
 
 # Copy application files
