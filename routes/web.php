@@ -117,6 +117,10 @@ use Illuminate\Support\Facades\Route;
 
     Route::get('/user-management',  App\Livewire\UserManagement::class)->name('user-management');
 
+    Route::get('/attencdence',  App\Livewire\Attendence::class)->name('attencdence');
+
+    Route::get('/salary-payment',  App\Livewire\SalaryPayments::class)->name('salary-payment');
+
     Route::fallback(function () {
         return response()->view('errors.subdomain_not_found', [], 404);
     });
