@@ -1,10 +1,9 @@
-# Start with a lightweight Alpine image
 FROM php:8.3-fpm-alpine
 
 # Set working directory
 WORKDIR /var/www/html
 
-# Install required packages
+# Install required dependencies
 RUN apk add --no-cache \
     nano \
     sqlite \
@@ -20,12 +19,13 @@ RUN apk add --no-cache \
     libjpeg-turbo-dev \
     libpng-dev \
     libzip-dev \
-    zlib-dev && \
+    zlib-dev \
+    bison \
+    re2c && \
     docker-php-ext-install \
     pdo \
     pdo_sqlite \
     mbstring \
-    tokenizer \
     xml \
     bcmath \
     zip && \
@@ -35,7 +35,7 @@ RUN apk add --no-cache \
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Set permissions
+# Set permissions for the application
 RUN chown -R www-data:www-data /var/www/html && chmod -R 755 /var/www/html
 
 # Copy application files
@@ -44,5 +44,5 @@ COPY . .
 # Expose port
 EXPOSE 9000
 
-# Run Laravel server
+# Run the Laravel application
 CMD ["php", "-S", "0.0.0.0:9000", "-t", "public"]
