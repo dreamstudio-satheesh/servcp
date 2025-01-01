@@ -121,6 +121,8 @@ use Illuminate\Support\Facades\Route;
 
     Route::get('/salary-payment',  App\Livewire\SalaryPayments::class)->name('salary-payment');
 
+    Route::get('/store-items',  App\Livewire\StoreItemManager::class)->name('store-items');
+
     Route::fallback(function () {
         return response()->view('errors.subdomain_not_found', [], 404);
     });
