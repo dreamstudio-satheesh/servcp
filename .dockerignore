@@ -5,6 +5,3 @@ storage/framework/cache
 storage/framework/sessions
 storage/framework/views
 vendor
-public/themes/material/*
-public/themes/material/assets/libs
-!public/themes/material/assets/
