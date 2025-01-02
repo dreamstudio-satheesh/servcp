@@ -1,7 +1,9 @@
 .git
 node_modules
 storage/logs
-storage/framework
+storage/framework/cache
+storage/framework/sessions
+storage/framework/views
 vendor
 public/themes/material/*
 public/themes/material/assets/libs
