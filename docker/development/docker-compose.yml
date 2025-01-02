@@ -1,0 +1,17 @@
+services:
+  app:
+    build:
+      context: ../../  # Context points to the project root
+      dockerfile: docker/development/Dockerfile
+    volumes:
+      - ../../:/var/www/html  # Map project root to /var/www/html in the container
+    ports:
+      - "8000:8000"  # Map host port 8000 to container port 8000
+    working_dir: /var/www/html
+    command: php artisan serve --host=0.0.0.0 --port=8000
+    environment:
+      APP_ENV: local
+      APP_DEBUG: "true"
+      APP_KEY: base64:CMttCpC8BVZ0VRlN6se/MB0J1Eftk18CIpGY9eFoICU=
+      DB_CONNECTION: sqlite
+      DB_DATABASE: /var/www/html/database/database.sqlite

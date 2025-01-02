@@ -1,0 +1,8 @@
+.git
+node_modules
+storage/logs
+storage/framework
+vendor
+public/themes/material/*
+public/themes/material/assets/libs
+!public/themes/material/assets/
