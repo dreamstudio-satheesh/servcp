@@ -28,10 +28,6 @@ RUN mkdir -p storage/framework/cache \
 # Install Laravel dependencies
 RUN composer install --optimize-autoloader --no-dev
 
-# Run database migrations and seed
-RUN php artisan config:cache && \
-    php artisan migrate --force --seed || true
-
 # Copy Nginx configuration
 COPY ./docker/production/nginx.conf /etc/nginx/nginx.conf
 
