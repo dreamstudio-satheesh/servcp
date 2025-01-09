@@ -105,7 +105,7 @@
                             </a>
                             <div class="collapse menu-dropdown" id="sidebarStore">
                                 <ul class="nav nav-sm flex-column">
-                                    <li class="nav-item"><a href="#" class="nav-link"
+                                    <li class="nav-item"><a href="{{ route('store-items') }}" class="nav-link"
                                             data-key="t-item-register">Item Register</a></li>
                                     <li class="nav-item"><a href="#" class="nav-link"
                                             data-key="t-purchase">Purchase</a></li>
