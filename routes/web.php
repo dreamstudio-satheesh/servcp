@@ -123,6 +123,9 @@ use Illuminate\Support\Facades\Route;
 
     Route::get('/store-items',  App\Livewire\StoreItemManager::class)->name('store-items');
 
+    Route::get('/purchases', \App\Livewire\PurchaseItemManager::class)->name('purchases.index');
+
+
     Route::get('/purchase/create',  App\Livewire\PurchaseForm::class)->name('purchase.create');
 
 

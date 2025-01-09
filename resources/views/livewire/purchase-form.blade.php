@@ -10,7 +10,7 @@
                     <!-- Purchase No -->
                     <div class="col-lg-3 col-md-6 mb-3">
                         <label>Purchase No</label>
-                        <input type="text" class="form-control" placeholder="Purchase No" wire:model="purchase_no">
+                        <input type="text" class="form-control" wire:model="purchase_no">
                         @error('purchase_no')
                             <span class="text-danger">{{ $message }}</span>
                         @enderror
@@ -63,13 +63,14 @@
                     </div>
                 </div>
 
-                <!-- Items Table -->
+                <!-- Items -->
+                <!-- Items -->
                 <div class="mt-4">
                     <h6>Items</h6>
                     <table class="table table-bordered">
                         <thead>
                             <tr>
-                                <th>Item Code</th>
+                                <th>Search Item</th>
                                 <th>Item Name</th>
                                 <th>Purchase Cost</th>
                                 <th>Quantity</th>
@@ -81,12 +82,55 @@
                         <tbody>
                             @foreach ($items as $index => $item)
                                 <tr>
-                                    <td>{{ $item['item_code'] }}</td>
-                                    <td>{{ $item['item_name'] }}</td>
-                                    <td>{{ $item['purchase_cost'] }}</td>
-                                    <td>{{ $item['quantity'] }}</td>
-                                    <td>{{ $item['tax'] }}</td>
-                                    <td>{{ $item['total'] }}</td>
+                                    <td>
+                                        <input 
+                                            type="text" 
+                                            class="form-control" 
+                                            wire:model="searchQuery"
+                                            placeholder="Search by code or name"
+                                            wire:keyup="searchItems">
+                                        <ul class="list-group mt-2" style="position: absolute; z-index: 999; max-height: 150px; overflow-y: auto;">
+                                            @foreach ($filteredItems as $storeItem)
+                                                <li 
+                                                    class="list-group-item"
+                                                    wire:click="selectItem({{ $index }}, {{ $storeItem->id }})"
+                                                    style="cursor: pointer;">
+                                                    {{ $storeItem->item_name }} ({{ $storeItem->item_code }})
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                        @error('items.' . $index . '.item_id')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </td>
+                                    
+                                    <td>
+                                        {{ optional(\App\Models\StoreItem::find($item['item_id']))->item_name ?? '' }}
+                                    </td>
+                                    <td>
+                                        <input type="number" class="form-control"
+                                            wire:model="items.{{ $index }}.purchase_cost">
+                                        @error('items.' . $index . '.purchase_cost')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </td>
+                                    <td>
+                                        <input type="number" class="form-control"
+                                            wire:model="items.{{ $index }}.quantity">
+                                        @error('items.' . $index . '.quantity')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </td>
+                                    <td>
+                                        <input type="number" class="form-control"
+                                            wire:model="items.{{ $index }}.tax">
+                                        @error('items.' . $index . '.tax')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </td>
+                                    <td>
+                                        {{ $item['purchase_cost'] * $item['quantity'] + $item['tax'] }}
+                                    </td>
                                     <td>
                                         <button class="btn btn-sm btn-danger"
                                             wire:click="removeItem({{ $index }})">Remove</button>
@@ -95,7 +139,7 @@
                             @endforeach
                         </tbody>
                     </table>
-                    <button class="btn btn-primary" wire:click="addItem">Add Item</button>
+                    <button class="btn btn-primary" wire:click.prevent="addItem">Add Item</button>
                 </div>
 
                 <!-- Summary -->
