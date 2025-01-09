@@ -11,6 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
+        
         Schema::create('store_items', function (Blueprint $table) {
             $table->id();
             $table->string('item_code')->unique(); // Unique item code
