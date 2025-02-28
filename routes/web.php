@@ -125,6 +125,9 @@ use Illuminate\Support\Facades\Route;
 
     Route::get('/purchase', \App\Livewire\Purchases::class)->name('purchases.index');
 
+    Route::get('/sales', \App\Livewire\SalesOrders::class)->name('sales.index');
+
+
 
     Route::get('/purchase/create',  App\Livewire\PurchaseForm::class)->name('purchase.create');
 
